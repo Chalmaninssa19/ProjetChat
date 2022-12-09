@@ -1,0 +1,18 @@
+package boite;
+
+import javax.swing.*;
+
+public class CompoChamp extends JComponent
+{
+    JTextField inputText;
+    JLabel lab;
+    public CompoChamp( JTextField fld, JLabel lb)
+    {
+        this.inputText = fld;
+        this.lab = lb;
+    }    
+    public JTextField getInputText() { return this.inputText; }
+    public JLabel getLab() { return this.lab; }
+    public void setInputText( JTextField jt ) { this.inputText = jt; }
+    public void setLab( JLabel jt ) { this.lab = jt; }
+}
