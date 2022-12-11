@@ -1,16 +1,17 @@
 package display;
 
 import window.*;
-import server.*;
 import client.*;
+import server.*;
+import java.net.Socket;
 
 public class Main {
-    public static void main( String [] args) throws Exception {
-        String host = "localhost";
-        int port = 8888;
-        Serveur server = new Serveur(port);
-        Client client = new Client( host, port);
-        Interface inter = new Interface( client);
-        //Interface inter1 = new Interface( server);
+    public static void main( String [] args ) throws Exception {
+        Socket socket = new Socket("localhost", 1234);
+        String nom = "rakoto";
+        Client client = new Client(socket, nom);
+        InterfaceClient interfaceClient  = new InterfaceClient(client);
+        ListenMessage listenMess = new ListenMessage(socket, interfaceClient);
+        listenMess.start();
     }
 }

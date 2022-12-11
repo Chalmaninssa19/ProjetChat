@@ -8,7 +8,7 @@ public class Envoyer extends JButton {
     public Envoyer(String envoyer) {
         setBounds(10, 400, 100, 100);
         button = new JButton(envoyer);
-        this.button.setBounds(330, 10, 100, 50);
+        this.button.setBounds(310, 500, 70, 50);
     }
 
 ///Getter et setters

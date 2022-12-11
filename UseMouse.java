@@ -8,32 +8,20 @@ import server.*;
 
 public class UseMouse implements MouseListener
 {
-    Interface fen;
-    Serveur server;
+    InterfaceClient fen;
     Client client;
 
-    public UseMouse( Interface fen, Client client) {
+    public UseMouse( InterfaceClient fen, Client client) {
         this.fen = fen;
         this.client = client;
     }
 
-    public UseMouse( Interface fen, Serveur server ) {
-        this.fen = fen;
-        this.server = server;
-    }
     public void mouseClicked( MouseEvent e ) {  //Ce qui se passe lorsqu'on clique sur la souris
-        if ( e.getSource() == fen.getContenu().getEnvoi().getButton()) {
-            try {
-                String message = ((JTextField)fen.getContenu().getChamp().getChamp()).getText();
-                String response = ((JTextField)fen.getContenu().getChamp().getChamp()).getText();
-                //server.connectoClient(response);
-                client.waitConnection(message);
-                ((JLabel)fen.getContenu().getChamp().getLab()).setText(client.getResponse());
-                ((JLabel)fen.getContenu().getChamp().getLab()).setText(server.getMessage());
-
-            } catch ( Exception ex) {
-                System.out.println(ex);
-            }
+        try {
+                String mess = ((JTextField)fen.getContenu().getChamp().getChamp()).getText();
+                client.sendMessage(mess, e, fen);
+        } catch( Exception ex) {
+            ex.printStackTrace();
         }
     }
     public void mousePressed(MouseEvent e)
