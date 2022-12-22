@@ -12,7 +12,6 @@ public class Conversation extends Thread {
     Socket socketClient;
     int numero;
     ArrayList<Socket> clientConnectes = new ArrayList<>();
-
     public Conversation ( Socket socketClient, int numero, ArrayList<Socket> clientConnectes) {
         super();
         this.socketClient = socketClient;
@@ -77,7 +76,7 @@ public class Conversation extends Thread {
             for ( Socket clientConnecte : clientConnectes ) {
                 if ( socketClient !=clientConnecte ) {
                     PrintWriter pw = new PrintWriter(clientConnecte.getOutputStream(), true);
-                    pw.println("Client " + num + " : " + message);
+                    pw.println(message);
                 }
             }            
         }   catch( Exception e) {

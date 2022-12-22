@@ -19,11 +19,12 @@ public class Client {
 ///Getters et setters
     public String getNom() { return this.nom; }
     public Socket getSocket() { return this.socket; }
-    public void setname( String nom ) { this.nom = nom; }
+    public void setNom( String nom ) { this.nom = nom; }
     public void setSocket( Socket socket) {  this.socket = socket; }
 
 ///Constructor
-    public Client( Socket socket, String name) {
+    public Client(){}   //constructeur vide
+    public Client( Socket socket, String name) {    //Constructeur de client
         this.socket = socket;
         this.nom = name;
     }
@@ -32,13 +33,20 @@ public class Client {
         try {
                 if ( e.getSource() == fen.getContenu().getEnvoi().getButton()) {
                     pw = new PrintWriter(socket.getOutputStream(), true);
-                    pw.println(mess);
+                    pw.println(this.nom + " : " + mess);
                 }
         } catch(Exception ex) {
             closeEverything();
         }
     }
     
+    public void creerClient( String adresse, String nom, int port) throws Exception {    //Creer un client
+        socket = new Socket( adresse, port);    //Creation du socket client
+        Client client = new Client(socket, nom);    //Le client est creer
+        InterfaceClient interfaceClient = new InterfaceClient(client);  //Creer l'interface client
+        ListenMessage listenMessage = new ListenMessage(socket, interfaceClient);   //creer un ecouteur pour le client
+        listenMessage.start();  //Ecouter le client
+    }
     public void closeEverything() {   //Fermer tous
         try {
             if ( pw != null) {

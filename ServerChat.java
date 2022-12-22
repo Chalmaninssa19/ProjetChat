@@ -1,7 +1,4 @@
 package server;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -22,6 +19,7 @@ public class ServerChat extends Thread {
             //Une connection pour chaque client qui veut se connecter et gerer une conversation avec chaque client connecte
             serverSocket = new ServerSocket(1234); //Demarre un 
             while ( true ) {
+                System.out.println("Jevous attends...");
                 Socket socketClient = serverSocket.accept();    //Accepter la connection d'un client a tout moment
                 nbClient++;
                 clientConnectes.add(socketClient);
